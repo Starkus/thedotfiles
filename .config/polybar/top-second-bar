@@ -1,0 +1,28 @@
+width = 90%
+height = 21
+offset-x = 5%
+
+; subtle
+;offset-y = 10 
+;override-redirect = false
+
+; i3
+offset-y = 24
+override-redirect = true
+
+fixed-center = true
+background = ${colors.background-alt}
+foreground = ${colors.foreground-alt}
+font-0 = "RobotoMono:size=6;2"
+font-1 = "Material Icons:size=10;4"
+border-top-size = 1
+border-top-color = ${colors.border}
+border-size = 0
+padding-left = 2
+padding-right = 1
+module-margin-left = 0
+module-margin-right = 0
+line-size = 0
+bottom = false
+cursor-click = pointer
+cursor-scroll = ns-resize
