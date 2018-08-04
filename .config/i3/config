@@ -30,17 +30,24 @@ font pango:monospace 8
 floating_modifier $mod
 
 # style
-default_border pixel 8
+default_border pixel 14 
 
 # autostart
 exec --no-startup-id hsetroot -fill ~/.wallpaper.jpg
 exec --no-startup-id xsettingsd &
-exec --no-startup-id compton -b &
-exec_always --no-startup-id ~/dotfiles/.config/i3/config/panel-bottom &
+exec --no-startup-id compton -b --config ~/compton.sample.conf --opengl &
+exec_always --no-startup-id ~/.config/polybar/launch.sh &
+exec --no-startup-id ~/inputConfig.sh
 
 # gaps
 gaps inner 16
-gaps outer 32
+gaps outer 8
+
+# screen brightness
+
+bindsym XF86AudioPlay exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
+bindcode 244 exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
+bindcode 160 exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous
 
 # start a terminal
 bindsym $mod+Return exec urxvt
@@ -49,7 +56,7 @@ bindsym $mod+Return exec urxvt
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec rofi -lines 12 -padding 18 -width 60 -location 0 -show drun -sidebar-mode -columns 3 -font 'Roboto Mono 8'
+bindsym $mod+d exec rofi -theme base16-gruvbox-dark-hard -lines 12 -padding 18 -width 60 -location 0 -show drun -sidebar-mode -columns 1 -font 'Roboto Mono 8'
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
@@ -117,6 +124,9 @@ set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
+
+# bsajdnosgj
+for_window [class="Mario 64 C++" instance="Mario 64 C++"] floating enable
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1

@@ -1,16 +1,17 @@
-width = 90%
+width = 100%
 height = 21
-offset-x = 5%
+;offset-x = 5%
 
 ; subtle
 ;offset-y = 10 
 ;override-redirect = false
 
 ; i3
-offset-y = 24
-override-redirect = true
+offset-y = 22
+override-redirect = false
+wm-restack = i3
 
-fixed-center = true
+:fixed-center = true
 background = ${colors.background-alt}
 foreground = ${colors.foreground-alt}
 font-0 = "RobotoMono:size=6;2"

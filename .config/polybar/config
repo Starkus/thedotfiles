@@ -13,14 +13,14 @@ dpi = 133
 include-file = ~/.config/polybar/top-bar
 modules-left = hostname ip volume uptime
 modules-center = date
-modules-right = menu-apps mail dnsDaemon memory lock
+modules-right = menu-apps mail batterys memory lock
 
 [bar/top-second]
 dpi = 133
 include-file = ~/.config/polybar/top-second-bar
 modules-left = reloadDns tor
-modules-center = wave fakemusic wave
-modules-right = wireless-network wlan eth
+modules-center = spotify 
+modules-right = wifi eth
 
 [bar/bottom]
 ;monitor = "eDP-1"
@@ -39,6 +39,11 @@ interface = wlp2s0
 interval = 3.0
 label-connected = %{F#ff0000} %{F-}%upspeed% %{F#00ff00} %{F-}%downspeed%
 
+[module/wifi]
+type = custom/script
+exec = ~/.config/polybar/wifi.sh
+format-padding = 2
+
 [module/lock]
 type = custom/text
 content =  
@@ -48,7 +53,7 @@ click-left = i3lock -i ~/images/bgi3lock.png -e
 
 [module/uptime]
 type = custom/script
-exec = uptime|awk '{print $2 " " $3 " " $4 " " $5 " " $6}'|cut -d ',' -f -2
+exec = uptime|awk '{print $2 " " $3 " " $4 " " $5 " " $6}'|cut -d ',' -f -1
 interval = 5
 format-prefix="  "
 format-prefix-foreground = ${colors.primary}
@@ -275,6 +280,13 @@ toggle-off-foreground = ${colors.secondary}
 
 label-offline = no sound
 
+[module/spotify]
+type = custom/script
+interval = 1
+format = "<label>"
+format-prefix = " %{F#7a1B54}  "
+exec = ~/.config/polybar/spotify.sh 
+
 [module/fakemusic]
 type = custom/text
 content = "%{F#16a193}Fantasia  %{F#B8eadb}*%{F-} %{F#934897} Stratovarius"
@@ -338,9 +350,9 @@ date = " %a %d %b  "
 date-alt = " %d-%m"
 time = "  %H:%M,"
 time-alt = %H:%M
-format-prefix = "<;;;;;;;;;]xxxx(  "
+#format-prefix = "<;;;;;;;;;]xxxx(  "
 format-prefix-foreground = ${colors.primary}
-format-suffix = " )xxxx[;;;;;;;;;>"
+#format-suffix = " )xxxx[;;;;;;;;;>"
 format-suffix-foreground = ${colors.primary}
 format-underline = #0a6cf5
 format-foreground = ${colors.foreground-alt}
@@ -384,6 +396,12 @@ animation-charging-0 = 
 animation-charging-1 = 
 animation-charging-foreground = ${colors.foreground-alt}
 animation-charging-framerate = 750
+
+[module/batterys]
+type = custom/script
+interval = 1
+format-foreground = ${colors.primary}
+exec = ~/.config/polybar/battery.sh 
 
 [settings]
 screenchange-reload = true

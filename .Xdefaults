@@ -1,5 +1,7 @@
 urxvt*depth: 32
 urxvt*background: rgba:0000/0000/0200/7000
-urxvt*font: xft:RobotoMono:size=8
+urxvt*font: xft:RobotoMono:size=8,\
+		xft:FreeSerif:size=8,\
+		xft:unifont:size=8
 urxvt*scrollBar: false
 urxvt*internalBorder: 42 
