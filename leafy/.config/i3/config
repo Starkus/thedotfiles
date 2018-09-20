@@ -35,7 +35,7 @@ default_border pixel 14
 # autostart
 exec --no-startup-id hsetroot -fill ~/.wallpaper.jpg
 exec --no-startup-id xsettingsd &
-exec --no-startup-id compton -b --config ~/compton.sample.conf --opengl &
+exec --no-startup-id compton -b --config ~/.config/compton/compton.conf --opengl &
 exec_always --no-startup-id ~/.config/polybar/launch.sh &
 exec --no-startup-id ~/inputConfig.sh
 
