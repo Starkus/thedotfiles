@@ -2,6 +2,8 @@
 # ~/.bashrc
 #
 
+export EDITOR='vim'
+
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
@@ -17,3 +19,8 @@ RESET="\[\e[0m\]"
 
 alias ls='ls --color=auto'
 PS1="${BLACK} \u \[\e[93m\]\[\e[97m\] \h ${BLACKTOYELLOW} ${YELLOW}\W ${YELLOWTOCLEAR}${RESET} \[\]"
+
+#powerline-daemon -q
+#POWERLINE_BASH_CONTINUATION=1
+#POWERLINE_BASH_SELECT=1
+#. /usr/lib/python3.7/site-packages/powerline/bindings/bash/powerline.sh
