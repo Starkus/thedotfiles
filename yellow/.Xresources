@@ -1,0 +1,57 @@
+urxvt*depth: 32
+urxvt*background: [70]#000000
+! urxvt*transparent: true
+! urxvt*shading: 30
+urxvt*font: xft:RobotoMonoForPowerline:size=8,\
+	xft:FreeSerif:size=8,\
+	xft:unifont:size=8
+urxvt*scrollBar: false
+urxvt*internalBorder: 16 
+
+urxvt*perl-ext-common: keyboard-select
+urxvt*keysym.M-Escape: perl:keyboard-select:activate
+
+! special
+*.foreground:   #e2e1e2
+*.background:   #5b565a
+*.cursorColor:  #e2e1e2
+
+! black
+*.color0:       #2f1e2e
+*.color8:       #776e71
+
+! red
+*.color1:       #ff877d
+*.color9:       #ef6155
+
+! green
+*.color2:       #6fd7a9
+*.color10:      #48b685
+
+! yellow
+*.color3:       #ffd454
+*.color11:      #fec418
+
+! blue
+*.color4:       #3aceff
+*.color12:      #06b6ef
+
+! magenta
+*.color5:       #9c78bd
+*.color13:      #815ba4
+
+! cyan
+*.color6:       #70d7d2
+*.color14:      #5bc4bf
+
+! white
+*.color7:       #a39e9b
+*.color15:      #d7d7d7
+
+! ROFI
+rofi.color-window: argb:b2000000, #fec418, argb:b2000000
+rofi.color-normal: argb:00000000, #e7e7e7, argb:00000000, #fec418, #1d2021
+rofi.padding: 24
+rofi.font: SF Pro Display 10
+rofi.eh: 1
+rofi.bw: 12
