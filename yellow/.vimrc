@@ -23,8 +23,16 @@ Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 
 Plugin 'Valloric/YouCompleteMe'
 
-Plugin 'itchyny/lightline.vim'
+"LaTeX"
+Plugin 'vim-latex/vim-latex'
+
+filetype plugin on
+filetype indent on
+let g:tex_flavor='latex'
+
+"Plugin 'itchyny/lightline.vim'
 "Plugin 'powerline/powerline'
+Plugin 'vim-airline/vim-airline'
 
 "Plugin 'chriskempson/base16-vim'"
 Plugin 'drewtempelmeyer/palenight.vim'
@@ -60,3 +68,11 @@ hi Visual term=reverse cterm=reverse guibg=Gray
 highlight YcmErrorSection ctermbg=1
 
 nmap <F8> :TagbarToggle<CR>
+
+nmap <F2> :NERDTree<CR>
+
+nnoremap ; :
+nnoremap : ;
+
+" Powerline
+let g:airline_powerline_fonts = 1
