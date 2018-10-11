@@ -39,11 +39,6 @@
 window {
     background: var(--bg) !important;
     font-size: 10pt !important;
-    /*margin: 12px !important;*/
-}
-
-#main-window {
-    margin: 0px !important;
 }
 
 #content-deck {
@@ -51,6 +46,31 @@ window {
     border: 12px;
     border-color: var(--bg) !important;
     border-top: 12px !important;
+}
+
+#content-deck[inFullscreen="false"] {
+    border-style: solid !important;
+    border: 12px;
+    border-color: var(--bg) !important;
+    border-top: 12px !important;
+}
+
+#window-controls, .scrollbutton-down, .scrollbutton-up, #new-tab-button, #alltabs-button {
+    display: none !important;
+}
+
+.arrowscrollbox-overflow-start-indicator, .arrowscrollbox-overflow-end-indicator {
+    display: none !important;
+    background: none !important;
+    margin-left: 12px !important;
+}
+
+/* Scroll bars */
+:-moz-any(#content,#appcontent) browser{
+    margin-right:-12px!important;
+    overflow-y:scroll;
+    margin-bottom:-12px!important;
+    overflow-x:scroll;
 }
 
 
@@ -72,6 +92,10 @@ window {
 #tabbrowser-tabs {
     background: var(--bg-light) !important;
     --tab-min-height: 25px !important;
+}
+.tabbrowser-tab {
+    padding-left: 8px !important;
+    padding-right: 8px !important;
 }
 tab, .tabbrowser-tabs *|tab {
     background: var(--bg-light) !important; 
@@ -158,6 +182,7 @@ tab, .tabbrowser-tabs *|tab {
     border-radius: 0px !important;
     margin-top: 8px !important;
     margin-bottom: 8px !important;
+    min-height: 24px !important;
 }
 
 #nav-bar[id], #PersonalToolbar[id], #web-developer-toolbar[id], #navigator-toolbox[tabsontop="true"] > #nav-bar[id], #navigator-toolbox[tabsontop="true"]:not([customizing]) > #nav-bar[collapsed="true"][id] + toolbar, #navigator-toolbox[tabsontop="true"]:not([customizing]) > #nav-bar[collapsed="true"] + #customToolbars + #PersonalToolbar[id], #navigator-toolbox[tabsontop="false"] > #nav-bar[id], #navigator-toolbox[tabsontop="false"]:not([customizing]) > #nav-bar[collapsed="true"][id] + toolbar, #navigator-toolbox[tabsontop="false"]:not([customizing]) > #nav-bar[collapsed="true"] + #customToolbars + #PersonalToolbar[id] {
