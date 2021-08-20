@@ -4,6 +4,9 @@ set exrc
 " File find paths
 "set path+=,/mnt/c/Users/starkus/source/repos/*
 
+" No delay for <Esc>O
+set timeoutlen=1000 ttimeoutlen=0
+
 " Indentation
 set tabstop=4
 set shiftwidth=4
@@ -128,17 +131,23 @@ hi cDefine ctermfg=darkmagenta
 hi PreProc ctermfg=darkmagenta
 hi Comment ctermfg=darkgrey
 
+" My silly tags
+au BufRead,BufNewFile *.cpp syn match myTag "@\w\+"
+au BufRead,BufNewFile *.h   syn match myTag "@\w\+"
+hi myTag ctermfg=magenta
+
 " No background
 highlight Normal ctermbg=none
+
 highlight Visual cterm=reverse ctermbg=black
 
 " Context menu colors
 highlight Pmenu ctermbg=darkgray ctermfg=lightgray
-highlight PmenuSel ctermbg=yellow
+highlight PmenuSel ctermbg=yellow ctermfg=black
 
 highlight VertSplit ctermbg=yellow ctermfg=black
 
-highlight Search cterm=reverse ctermbg=none ctermfg=none
+highlight Search ctermbg=yellow ctermfg=black
 
 " REMAPS
 " Resize with arrow keys
@@ -228,7 +237,7 @@ endfunction
 
 command! Build :call term_sendkeys("terminal", g:build_command . "\<CR>") | call ShowTerminal()
 command! BuildR :call term_sendkeys("terminal", g:build_release_command . "\<CR>") | call ShowTerminal()
-command! Run :call term_sendkeys("terminal", g:run_command . "\<CR>")
+command! -nargs=* -complete=file Run :call term_sendkeys("terminal", g:run_command . " <args>\<CR>")
 command! Debug :call term_sendkeys("terminal", g:debug_command . "\<CR>")
 
 cnoreabbrev b Build
