@@ -1,6 +1,11 @@
 set exrc
 "set secure
 
+" Unicode
+set encoding=utf8
+set fileencoding=utf8
+set fileencodings=utf8
+
 " File find paths
 "set path+=,/mnt/c/Users/starkus/source/repos/*
 
@@ -37,24 +42,28 @@ set listchars=tab:\ ,space:·
 set hidden
 set nocompatible
 filetype off
+if exists('+shellslash') " Only for Windows
+	set shellslash
+endif
+set rtp+=~/vimfiles/bundle/Vundle.vim
 set lazyredraw
 " set undofile " nooo
 
-call plug#begin('~/.vim/plugged')
+call vundle#begin()
 
-Plug 'VundleVim/Vundle.vim'
-Plug 'itchyny/lightline.vim'
-Plug 'mengelbrecht/lightline-bufferline' " Show buffer list on lightline
-Plug 'ericcurtin/CurtineIncSw.vim' " Switch between source and header files
-Plug 'wadackel/vim-dogrun' " Colorscheme
-Plug 'NLKNguyen/c-syntax.vim' " Few more highlight groups
-Plug 'haya14busa/vim-asterisk' " Better * and #
-Plug 'justinmk/vim-dirvish' " Browse current buffer's directory with - and open another file
-Plug 'markonm/traces.vim' " Realtime :s preview
-Plug 'tommcdo/vim-exchange' " Swap
-Plug 'tpope/vim-fugitive' " Git
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'itchyny/lightline.vim'
+Plugin 'mengelbrecht/lightline-bufferline' " Show buffer list on lightline
+Plugin 'ericcurtin/CurtineIncSw.vim' " Switch between source and header files
+Plugin 'srcery-colors/srcery-vim' " Colorscheme
+Plugin 'NLKNguyen/c-syntax.vim' " Few more highlight groups
+Plugin 'haya14busa/vim-asterisk' " Better * and #
+Plugin 'justinmk/vim-dirvish' " Browse current buffer's directory with - and open another file
+Plugin 'markonm/traces.vim' " Realtime :s preview
+Plugin 'tommcdo/vim-exchange' " Swap
+Plugin 'tpope/vim-fugitive' " Git
 
-call plug#end()
+call vundle#end()
 
 " Colorscheme
 set t_Co=256
@@ -76,7 +85,7 @@ map gz# <Plug>(asterisk-gz#)
 set showtabline=2
 let g:lightline#bufferline#show_number = 2
 let g:lightline = {
-	\ 'colorscheme': 'dogrun',
+	\ 'colorscheme': 'srcery',
 	\ 'separator': { 'left': '', 'right': '' },
 	\ 'subseparator': { 'left': '', 'right': '' },
 	\ 'active': {
@@ -117,18 +126,25 @@ endfunction
 syntax on
 
 " Extra C highlighting
-hi cUserFunction ctermfg=yellow
-hi cOperator ctermfg=red
-hi cDelimiter ctermfg=lightblue
-hi cType ctermfg=cyan
-hi cConditional ctermfg=yellow
-hi cRepeat ctermfg=yellow
-hi cStorageClass ctermfg=lightgreen
-hi cInclude ctermfg=darkmagenta
-hi cDefine ctermfg=darkmagenta
-hi PreProc ctermfg=darkmagenta
-hi Comment ctermfg=darkgrey
-colorscheme dogrun " Gvim hack, change colorscheme so highlights take effect.
+hi cUserFunction ctermfg=yellow guifg=yellow
+hi cOperator ctermfg=red guifg=red
+hi cDelimiter ctermfg=lightblue guifg=lightblue
+hi cType ctermfg=cyan guifg=cyan
+hi cConditional ctermfg=yellow guifg=yellow
+hi cRepeat ctermfg=yellow guifg=yellow
+hi cStorageClass ctermfg=lightgreen guifg=lightgreen
+hi cInclude ctermfg=darkmagenta guifg=darkmagenta
+hi cDefine ctermfg=darkmagenta guifg=darkmagenta
+hi PreProc ctermfg=darkmagenta guifg=darkmagenta
+hi Comment ctermfg=darkgrey guifg=darkgrey
+
+colorscheme srcery " Gvim hack, change colorscheme so highlights take effect.
+
+" Louder diff highlights
+hi DiffAdd    cterm=reverse gui=reverse
+hi DiffChange cterm=reverse gui=reverse
+hi DiffDelete cterm=reverse gui=reverse
+hi DiffText   cterm=reverse gui=reverse
 
 " My silly tags
 au BufRead,BufNewFile *.cpp syn match myTag "@\w\+"
