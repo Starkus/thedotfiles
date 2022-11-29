@@ -2,6 +2,11 @@ set encoding=utf8
 set exrc
 "set secure
 
+" Unicode
+set encoding=utf8
+set fileencoding=utf8
+set fileencodings=utf8
+
 " File find paths
 set path+=~/source/repos/*
 
@@ -38,6 +43,10 @@ set listchars=tab:\ ,space:·
 set hidden
 set nocompatible
 filetype off
+if exists('+shellslash') " Only for Windows
+	set shellslash
+endif
+set rtp+=~/vimfiles/bundle/Vundle.vim
 set lazyredraw
 " set undofile " nooo
 
@@ -47,8 +56,8 @@ call vundle#begin('~/vimfiles/bundle')
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'itchyny/lightline.vim'
 Plugin 'mengelbrecht/lightline-bufferline' " Show buffer list on lightline
-"Plugin 'ericcurtin/CurtineIncSw.vim' " Switch between source and header files (linux only)
 Plugin 'NLKNguyen/papercolor-theme' " Colorscheme
+Plugin 'ericcurtin/CurtineIncSw.vim' " Switch between source and header files
 Plugin 'NLKNguyen/c-syntax.vim' " Few more highlight groups
 Plugin 'haya14busa/vim-asterisk' " Better * and #
 Plugin 'justinmk/vim-dirvish' " Browse current buffer's directory with - and open another file
