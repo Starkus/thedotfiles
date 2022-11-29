@@ -1,8 +1,9 @@
+set encoding=utf8
 set exrc
 "set secure
 
 " File find paths
-"set path+=,/mnt/c/Users/starkus/source/repos/*
+set path+=~/source/repos/*
 
 " No delay for <Esc>O
 set timeoutlen=1000 ttimeoutlen=0
@@ -15,7 +16,7 @@ set smartindent
 set cindent
 
 " Line numbers
-set relativenumber
+"set relativenumber
 set number
 
 " Formatting
@@ -40,21 +41,23 @@ filetype off
 set lazyredraw
 " set undofile " nooo
 
-call plug#begin('~/.vim/plugged')
+set rtp+=~/vimfiles/bundle/Vundle.vim
+call vundle#begin('~/vimfiles/bundle')
 
-Plug 'VundleVim/Vundle.vim'
-Plug 'itchyny/lightline.vim'
-Plug 'mengelbrecht/lightline-bufferline' " Show buffer list on lightline
-Plug 'ericcurtin/CurtineIncSw.vim' " Switch between source and header files
-Plug 'wadackel/vim-dogrun' " Colorscheme
-Plug 'NLKNguyen/c-syntax.vim' " Few more highlight groups
-Plug 'haya14busa/vim-asterisk' " Better * and #
-Plug 'justinmk/vim-dirvish' " Browse current buffer's directory with - and open another file
-Plug 'markonm/traces.vim' " Realtime :s preview
-Plug 'tommcdo/vim-exchange' " Swap
-Plug 'tpope/vim-fugitive' " Git
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'itchyny/lightline.vim'
+Plugin 'mengelbrecht/lightline-bufferline' " Show buffer list on lightline
+"Plugin 'ericcurtin/CurtineIncSw.vim' " Switch between source and header files (linux only)
+Plugin 'NLKNguyen/papercolor-theme' " Colorscheme
+Plugin 'NLKNguyen/c-syntax.vim' " Few more highlight groups
+Plugin 'haya14busa/vim-asterisk' " Better * and #
+Plugin 'justinmk/vim-dirvish' " Browse current buffer's directory with - and open another file
+Plugin 'markonm/traces.vim' " Realtime :s preview
+Plugin 'tommcdo/vim-exchange' " Swap
+Plugin 'tpope/vim-fugitive' " Git
+Plugin 'jansedivy/jai.vim' " Jai syntax
 
-call plug#end()
+call vundle#end()
 
 " Colorscheme
 set t_Co=256
@@ -76,7 +79,7 @@ map gz# <Plug>(asterisk-gz#)
 set showtabline=2
 let g:lightline#bufferline#show_number = 2
 let g:lightline = {
-	\ 'colorscheme': 'dogrun',
+	\ 'colorscheme': 'PaperColor',
 	\ 'separator': { 'left': '', 'right': '' },
 	\ 'subseparator': { 'left': '', 'right': '' },
 	\ 'active': {
@@ -128,12 +131,14 @@ hi cInclude ctermfg=darkmagenta
 hi cDefine ctermfg=darkmagenta
 hi PreProc ctermfg=darkmagenta
 hi Comment ctermfg=darkgrey
-colorscheme dogrun " Gvim hack, change colorscheme so highlights take effect.
+colorscheme PaperColor " Gvim hack, change colorscheme so highlights take effect.
 
 " My silly tags
 au BufRead,BufNewFile *.cpp syn match myTag "@\w\+"
 au BufRead,BufNewFile *.h   syn match myTag "@\w\+"
 hi myTag ctermfg=magenta
+
+au BufRead,BufNewFile *.emi set syntax=jai
 
 " No background
 highlight Normal ctermbg=none
@@ -160,7 +165,21 @@ nnoremap <C-Left>	5<C-w><
 nnoremap <C-Right>	5<C-w>>
 
 " Switch source <-> header
-nnoremap <silent> <C-H> :silent! call CurtineIncSw()<CR>
+function! SwitchSourceHeader()
+	if match(expand("%"), '\.c') > 0
+		let path = substitute(expand("%"), '\.c\(pp\)\?', '.h', "")
+	elseif match(expand("%"), '\.h') > 0
+		let path = substitute(expand("%"), '\.h\(pp\)\?', '.c', "")
+	else
+		return 0
+	endif
+	if filereadable(path)
+		exe "e " . path
+	elseif filereadable(path . "pp")
+		exe "e " . path . "pp"
+	endif
+endfunction
+nnoremap <silent> <C-H> :silent! call SwitchSourceHeader()<CR>
 
 " Consistent Y
 nnoremap Y y$
@@ -224,9 +243,9 @@ nmap <Leader>c0 <Plug>lightline#bufferline#delete(10)
 function! StartTerminal()
 	if bufnr("terminal") == -1
 		if filereadable("shell.bat")
-			belowright call term_start("cmd.exe /k shell.bat", {'term_name':'terminal', 'vertical':1, 'term_cols':80, 'term_kill':'quit'})
+			belowright call term_start("cmd.exe /k shell.bat", {'term_name':'terminal', 'vertical':1, 'term_cols':80, 'term_kill':'term'})
 		else
-			belowright call term_start("cmd.exe", {'term_name':'terminal', 'vertical':1, 'term_cols':80, 'term_kill':'quit'})
+			belowright call term_start("cmd.exe",              {'term_name':'terminal', 'vertical':1, 'term_cols':80, 'term_kill':'term'})
 		endif
 	endif
 	autocmd bufenter * if (winnr("$") == 1 && bufwinnr("terminal") == 1) | q! | endif
@@ -260,7 +279,7 @@ endfunction
 
 command! -nargs=* Build :call term_sendkeys("terminal", g:build_command . " <args>\<CR>") | call ShowTerminal()
 command! BuildR :call term_sendkeys("terminal", g:build_release_command . "\<CR>") | call ShowTerminal()
-command! -nargs=* -complete=file Run :call term_sendkeys("terminal", g:run_command . " <args>\<CR>")
+"command! -nargs=* -complete=file Run :call term_sendkeys("terminal", g:run_command . " <args>\<CR>")
 command! Debug :call term_sendkeys("terminal", g:debug_command . "\<CR>")
 
 command! RunToCursor :call term_sendkeys("terminal", 'remedybg.exe run-to-cursor ' . expand('%:p') . ' ' . line('.') . "\<CR>")
