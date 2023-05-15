@@ -2,13 +2,11 @@ set encoding=utf8
 set exrc
 "set secure
 
-" Unicode
-set encoding=utf8
-set fileencoding=utf8
-set fileencodings=utf8
-
 " File find paths
 set path+=~/source/repos/*
+
+" No swap files all over the place
+set dir="~/vimswap//"
 
 " No delay for <Esc>O
 set timeoutlen=1000 ttimeoutlen=0
@@ -43,10 +41,6 @@ set listchars=tab:\ ,space:·
 set hidden
 set nocompatible
 filetype off
-if exists('+shellslash') " Only for Windows
-	set shellslash
-endif
-set rtp+=~/vimfiles/bundle/Vundle.vim
 set lazyredraw
 " set undofile " nooo
 
@@ -56,8 +50,8 @@ call vundle#begin('~/vimfiles/bundle')
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'itchyny/lightline.vim'
 Plugin 'mengelbrecht/lightline-bufferline' " Show buffer list on lightline
+"Plugin 'ericcurtin/CurtineIncSw.vim' " Switch between source and header files (linux only)
 Plugin 'NLKNguyen/papercolor-theme' " Colorscheme
-Plugin 'ericcurtin/CurtineIncSw.vim' " Switch between source and header files
 Plugin 'NLKNguyen/c-syntax.vim' " Few more highlight groups
 Plugin 'haya14busa/vim-asterisk' " Better * and #
 Plugin 'justinmk/vim-dirvish' " Browse current buffer's directory with - and open another file
@@ -147,7 +141,7 @@ au BufRead,BufNewFile *.cpp syn match myTag "@\w\+"
 au BufRead,BufNewFile *.h   syn match myTag "@\w\+"
 hi myTag ctermfg=magenta
 
-au BufRead,BufNewFile *.emi set syntax=jai
+au BufRead,BufNewFile *.fab set syntax=jai
 
 " No background
 highlight Normal ctermbg=none
@@ -300,6 +294,11 @@ cnoreabbrev wb write \| Build
 cnoreabbrev d Debug
 
 nnoremap <silent> <F10> :call ToggleTerminal()<CR>
+
+" No Windows remaps
+silent! vunmap <C-X>
+silent! vunmap <C-C>
+silent! vunmap <C-V>
 
 " Windows Terminal
 if &term =~ "xterm"
